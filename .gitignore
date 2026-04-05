@@ -1,0 +1,11 @@
+# Binaries
+*.exe
+/incident
+
+# Incidents storage (ignoring content, but we have a nested .gitignore there)
+.incidents/
+
+# Test dependencies and caches
+/vendor/
+*.test
+*.out
