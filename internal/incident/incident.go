@@ -17,9 +17,10 @@ const (
 
 // Incident represents the state of an incident.
 type Incident struct {
-	ID        string    `json:"id"`
-	Title     string    `json:"title"`
-	CreatedAt time.Time `json:"created_at"`
+	ID             string    `json:"id"`
+	Title          string    `json:"title"`
+	CreatedAt      time.Time `json:"created_at"`
+	SlackChannelID string    `json:"slack_channel_id,omitempty"`
 }
 
 // Declare initializes a new incident folder and its state.
@@ -71,4 +72,33 @@ func Declare(title string) (*Incident, error) {
 	}
 
 	return inc, nil
+}
+
+// UpdateSlackChannel updates the metadata.json with the provided Slack channel ID.
+func UpdateSlackChannel(id string, channelID string) error {
+	path := filepath.Join(incidentsDir, id)
+	metadataPath := filepath.Join(path, "metadata.json")
+
+	data, err := os.ReadFile(metadataPath)
+	if err != nil {
+		return fmt.Errorf("failed to read metadata: %w", err)
+	}
+
+	var inc Incident
+	if err := json.Unmarshal(data, &inc); err != nil {
+		return fmt.Errorf("failed to unmarshal metadata: %w", err)
+	}
+
+	inc.SlackChannelID = channelID
+
+	newData, err := json.MarshalIndent(inc, "", "  ")
+	if err != nil {
+		return fmt.Errorf("failed to marshal metadata: %w", err)
+	}
+
+	if err := os.WriteFile(metadataPath, newData, 0644); err != nil {
+		return fmt.Errorf("failed to write metadata file: %w", err)
+	}
+
+	return nil
 }

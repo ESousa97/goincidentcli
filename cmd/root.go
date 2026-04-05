@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"goincidentcli/internal/config"
 
+	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -63,6 +65,7 @@ func initConfig() {
 			// Create a default empty config file
 			viper.Set("api_token", "")
 			viper.Set("base_url", "")
+			viper.Set("slack_token", "")
 			if err := viper.SafeWriteConfigAs(cfgPath); err != nil {
 				fmt.Printf("Error creating config file: %v\n", err)
 			} else {
@@ -71,13 +74,21 @@ func initConfig() {
 		}
 	}
 
+	// Load .env if it exists
+	_ = godotenv.Load(".env")
+
+	viper.SetEnvPrefix("INCIDENT")
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	_ = viper.BindEnv("api_token")
+	_ = viper.BindEnv("base_url")
+	_ = viper.BindEnv("slack_token")
 	viper.AutomaticEnv() // read in environment variables that match
 
 	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-		// Unmarshal into typed struct
-		if err := viper.Unmarshal(&appCfg); err != nil {
-			fmt.Printf("Error unmarshaling config: %v\n", err)
-		}
+	_ = viper.ReadInConfig()
+
+	// Unmarshal into typed struct (from config file and environment)
+	if err := viper.Unmarshal(&appCfg); err != nil {
+		fmt.Printf("Error unmarshaling config: %v\n", err)
 	}
 }
