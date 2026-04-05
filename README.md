@@ -1,55 +1,55 @@
 # incident CLI 🛡️
 
-Uma ferramenta moderna e modular em Go para gerenciamento de incidentes diretamente do terminal. O `incident` auxilia no rastreamento, declaração e isolamento de estado de ocorrências técnicas de forma rápida e segura.
+A modern and modular CLI tool written in Go for incident management directly from the terminal. `incident` helps track, declare, and isolate the state of technical occurrences quickly and safely.
 
-## 🚀 Funcionalidades
+## 🚀 Features
 
-- **Identificação Híbrida**: IDs gerados no formato `INC-YYYYMMDD-XXXX` para fácil ordenação e referência.
-- **Isolamento de Estado**: Cada incidente possui sua própria pasta em `.incidents/[ID]`.
-- **Git Friendly**: Criação automática de `.gitignore` para evitar o versionamento acidental de logs e estados locais.
-- **Configuração Flexível**: Gerenciamento de tokens e URLs via `~/.incident.yaml` utilizando Viper.
-- **Arquitetura Stateless**: Projetado para ser leve e escalável.
+- **Hybrid Identification**: IDs generated in the `INC-YYYYMMDD-XXXX` format for easy sorting and reference.
+- **State Isolation**: Each incident has its own dedicated folder in `.incidents/[ID]`.
+- **Git Friendly**: Automatically creates a `.gitignore` file to prevent accidental versioning of local logs and states.
+- **Flexible Configuration**: Manage tokens and URLs via `~/.incident.yaml` using Viper.
+- **Stateless Architecture**: Designed to be lightweight and scalable.
 
-## 📦 Instalação
+## 📦 Installation
 
-Certifique-se de ter o Go 1.21+ instalado.
+Ensure you have Go 1.21+ installed.
 
 ```powershell
-# Clone o repositório
+# Clone the repository
 git clone https://github.com/ESousa97/goincidentcli.git
 cd goincidentcli
 
-# Build do binário
+# Build the binary
 go build -o incident.exe
 ```
 
-## 🛠️ Uso
+## 🛠️ Usage
 
-### Declarar um Incidente
+### Declare an Incident
 
 ```powershell
-.\incident.exe declare --title "Falha na latência da API de Autenticação"
+.\incident.exe declare --title "Authentication API latency spike"
 ```
 
-**Resultado esperado:**
-- Criado diretório `.incidents/INC-20260405-b7x2/`.
-- Configurações carregadas de `~/.incident.yaml`.
+**Expected results:**
+- Created directory `.incidents/INC-20260405-b7x2/`.
+- Configuration loaded from `~/.incident.yaml`.
 
-## ⚙️ Configuração
+## ⚙️ Configuration
 
-No primeiro uso, o CLI criará automaticamente um template em seu diretório de usuário (`~/.incident.yaml`). Edite este arquivo para preencher suas credenciais:
+On the first run, the CLI will automatically create a template in your home directory (`~/.incident.yaml`). Edit this file to fill in your credentials:
 
 ```yaml
-api_token: "seu_token_aqui"
-base_url: "https://api.exemplo.com"
+api_token: "your_token_here"
+base_url: "https://api.example.com"
 ```
 
-## 🏗️ Estrutura do Projeto
+## 🏗️ Project Structure
 
-- `/cmd`: Comandos Cobra (CLI entrypoints).
-- `/internal/config`: Lógica de carregamento e tipagem de configurações.
-- `/internal/incident`: Domínio de negócio e manipulação de arquivos do incidente.
+- `/cmd`: Cobra commands (CLI entrypoints).
+- `/internal/config`: Configuration loading and typing logic.
+- `/internal/incident`: Business domain and incident file manipulation.
 
-## 📄 Licença
+## 📄 License
 
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+Distributed under the MIT License. See `LICENSE` for more information.
