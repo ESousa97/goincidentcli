@@ -25,8 +25,9 @@ type Incident struct {
 
 // Declare initializes a new incident folder and its state.
 func Declare(title string) (*Incident, error) {
-	// Generate ID: INC-YYYYMMDD-NanoID (4 chars)
-	suffix, err := gonanoid.New(4)
+	// Generate ID: INC-YYYYMMDD-NanoID (4 chars, alphanumeric only)
+	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+	suffix, err := gonanoid.Generate(alphabet, 4)
 	if err != nil {
 		return nil, fmt.Errorf("failed to generate ID suffix: %w", err)
 	}
