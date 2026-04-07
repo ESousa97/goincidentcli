@@ -148,12 +148,12 @@ func (m Model) viewHeader(width int) string {
 func (m Model) viewTimer(width int) string {
 	elapsed := time.Since(m.inc.CreatedAt)
 	h := int(elapsed.Hours())
-	min := int(elapsed.Minutes()) % 60
+	mins := int(elapsed.Minutes()) % 60
 	sec := int(elapsed.Seconds()) % 60
 
 	content := lipgloss.JoinHorizontal(lipgloss.Center,
 		sectionStyle.Render("⏱  Duration  "),
-		timerValueStyle.Render(fmt.Sprintf("%02d:%02d:%02d", h, min, sec)),
+		timerValueStyle.Render(fmt.Sprintf("%02d:%02d:%02d", h, mins, sec)),
 	)
 
 	return lipgloss.NewStyle().
