@@ -12,3 +12,14 @@
 
 # Environment Variables
 .env
+
+# IA
+.claude/
+.gemini/
+.vscode/
+.agent/
+.cursor/
+.codex/
+.antigravity/
+.aider/
+.aider/
