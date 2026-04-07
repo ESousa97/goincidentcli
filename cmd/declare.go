@@ -9,7 +9,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var title string
+var (
+	title    string
+	severity string
+)
 
 // declareCmd represents the declare command
 var declareCmd = &cobra.Command{
@@ -21,12 +24,17 @@ var declareCmd = &cobra.Command{
 			return fmt.Errorf("the --title flag is required")
 		}
 
-		inc, err := incident.Declare(title)
+		validSeverities := map[string]bool{"SEV1": true, "SEV2": true, "SEV3": true}
+		if !validSeverities[severity] {
+			return fmt.Errorf("invalid severity %q: must be SEV1, SEV2, or SEV3", severity)
+		}
+
+		inc, err := incident.Declare(title, severity)
 		if err != nil {
 			return fmt.Errorf("failed to declare incident: %w", err)
 		}
 
-		fmt.Printf("Incident declared locally!\nID: %s\nTitle: %s\nFolder created: .incidents/%s\n", inc.ID, inc.Title, inc.ID)
+		fmt.Printf("Incident declared locally!\nID: %s\nTitle: %s\nSeverity: %s\nFolder created: .incidents/%s\n", inc.ID, inc.Title, inc.Severity, inc.ID)
 
 		// Initial timeline entry with optional Prometheus snapshot
 		prometheusMetrics := capturePrometheusMetrics()
@@ -77,5 +85,6 @@ func init() {
 	RootCmd.AddCommand(declareCmd)
 
 	declareCmd.Flags().StringVarP(&title, "title", "t", "", "Title of the incident (required)")
+	declareCmd.Flags().StringVarP(&severity, "severity", "s", "SEV3", "Incident severity: SEV1, SEV2, or SEV3")
 	_ = declareCmd.MarkFlagRequired("title")
 }

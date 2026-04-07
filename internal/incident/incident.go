@@ -19,12 +19,13 @@ const (
 type Incident struct {
 	ID             string    `json:"id"`
 	Title          string    `json:"title"`
+	Severity       string    `json:"severity,omitempty"`
 	CreatedAt      time.Time `json:"created_at"`
 	SlackChannelID string    `json:"slack_channel_id,omitempty"`
 }
 
 // Declare initializes a new incident folder and its state.
-func Declare(title string) (*Incident, error) {
+func Declare(title string, severity string) (*Incident, error) {
 	// Generate ID: INC-YYYYMMDD-NanoID (4 chars, alphanumeric only)
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 	suffix, err := gonanoid.Generate(alphabet, 4)
@@ -58,6 +59,7 @@ func Declare(title string) (*Incident, error) {
 	inc := &Incident{
 		ID:        id,
 		Title:     title,
+		Severity:  severity,
 		CreatedAt: time.Now(),
 	}
 
