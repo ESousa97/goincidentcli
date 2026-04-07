@@ -1,3 +1,4 @@
+// Package slack provides Slack API integration for automated channel provisioning during incidents.
 package slack
 
 import (
@@ -58,8 +59,8 @@ func (c *client) SetChannelPurpose(channelID, purpose string) error {
 func (c *client) PostInitialMessage(channelID string, incID string, title string) error {
 	attachment := slack.Attachment{
 		Color: "#f2c744", // Warning color
-		Title: fmt.Sprintf("🚨 Novo Incidente Declarado: %s", title),
-		Text:  fmt.Sprintf("ID: %s\n\n*Próximos Passos:*\n1. Identificar o Incident Commander (IC).\n2. Estabelecer canal de comunicação (este).\n3. Investigar a causa raiz.", incID),
+		Title: fmt.Sprintf("🚨 New Incident Declared: %s", title),
+		Text:  fmt.Sprintf("ID: %s\n\n*Next Steps:*\n1. Identify the Incident Commander (IC).\n2. Establish communication channel (this one).\n3. Investigate root cause.", incID),
 		Fields: []slack.AttachmentField{
 			{
 				Title: "Status",

@@ -1,3 +1,4 @@
+// Package metrics reads prometheus data and performs instantaneous queries for incident context.
 package metrics
 
 import (

@@ -1,3 +1,4 @@
+// Package cmd contains all the CLI commands for goincidentcli.
 package cmd
 
 import (
@@ -18,7 +19,7 @@ var (
 	appCfg  config.Config
 )
 
-// RootCmd represents the base command when called without any subcommands
+// RootCmd represents the base command when called without any subcommands.
 var RootCmd = &cobra.Command{
 	Use:   "incident",
 	Short: "A simple incident management CLI",
@@ -26,7 +27,7 @@ var RootCmd = &cobra.Command{
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the RootCmd.
+// This is called by [main.main]. It only needs to happen once to the RootCmd.
 func Execute() {
 	err := RootCmd.Execute()
 	if err != nil {

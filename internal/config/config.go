@@ -1,3 +1,4 @@
+// Package config provides configuration structures and loading logic for goincidentcli.
 package config
 
 // ServiceConfig holds the name and health-check URL for a monitored service.

@@ -1,3 +1,4 @@
+// Package incident provides functionality for declaring and managing local incident states.
 package incident
 
 import (

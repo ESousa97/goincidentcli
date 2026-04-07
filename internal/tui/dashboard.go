@@ -1,3 +1,4 @@
+// Package tui contains the BubbleTea terminal UI components for goincidentcli.
 package tui
 
 import (
@@ -57,6 +58,7 @@ func NewModel(inc *incident.Incident, incDir string, configs []ServiceConfig) Mo
 	}
 }
 
+// Init initializes the dashboard model by loading the timeline and checking services.
 func (m Model) Init() tea.Cmd {
 	return tea.Batch(
 		tickCmd(),
@@ -65,6 +67,7 @@ func (m Model) Init() tea.Cmd {
 	)
 }
 
+// Update processes incoming messages and updates the dashboard state.
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
@@ -94,6 +97,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
+// View returns the string representation of the dashboard to be rendered.
 func (m Model) View() string {
 	if m.width == 0 {
 		return "Loading…"

@@ -1,3 +1,4 @@
+// Package tui contains the BubbleTea terminal UI components for goincidentcli.
 package tui
 
 import "github.com/charmbracelet/lipgloss"

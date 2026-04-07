@@ -41,6 +41,7 @@ file in the incident's directory ready for review.`,
 		}
 
 		// Prepare data for the template
+		// TimelineEntryData represents a single entry in the timeline for the template.
 		type TimelineEntryData struct {
 			Time    string
 			Author  string
@@ -48,6 +49,7 @@ file in the incident's directory ready for review.`,
 			Metrics map[string]string
 		}
 
+		// PostMortemData represents the data structure passed to the post-mortem template.
 		type PostMortemData struct {
 			ID      string
 			Title   string

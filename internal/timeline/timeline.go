@@ -1,3 +1,4 @@
+// Package timeline handles the creation and loading of chronological event records for an incident.
 package timeline
 
 import (
