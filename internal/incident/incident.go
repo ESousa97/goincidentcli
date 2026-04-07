@@ -80,6 +80,25 @@ func Dir(id string) string {
 	return filepath.Join(incidentsDir, id)
 }
 
+// Get loads an incident's metadata.json by its ID.
+func Get(id string) (*Incident, error) {
+	metadataPath := filepath.Join(Dir(id), "metadata.json")
+	data, err := os.ReadFile(metadataPath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return nil, fmt.Errorf("incident %q not found", id)
+		}
+		return nil, fmt.Errorf("failed to read metadata for %q: %w", id, err)
+	}
+
+	var inc Incident
+	if err := json.Unmarshal(data, &inc); err != nil {
+		return nil, fmt.Errorf("failed to parse metadata for %q: %w", id, err)
+	}
+
+	return &inc, nil
+}
+
 // FindMostRecent scans the incidents directory and returns the most recently created incident.
 func FindMostRecent() (*Incident, error) {
 	entries, err := os.ReadDir(incidentsDir)
