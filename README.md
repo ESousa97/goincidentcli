@@ -1,23 +1,23 @@
-# Go Incident CLI
+<div align="center">
+  <h1>Go Incident CLI</h1>
+  <p>A modern and modular CLI tool written in Go for incident management directly from the terminal.</p>
 
-> A modern and modular CLI tool written in Go for incident management directly from the terminal.
+  <img src="assets/github-go.png" alt="Go Incident CLI Banner" width="600px">
 
-<!-- Real badges (not decorative) -->
-![CI](https://github.com/ESousa97/goincidentcli/actions/workflows/ci.yml/badge.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/ESousa97/goincidentcli)](https://goreportcard.com/report/github.com/ESousa97/goincidentcli)
-[![Go Reference](https://pkg.go.dev/badge/github.com/ESousa97/goincidentcli.svg)](https://pkg.go.dev/github.com/ESousa97/goincidentcli)
-![License](https://img.shields.io/github/license/ESousa97/goincidentcli)
-![Go Version](https://img.shields.io/github/go-mod/go-version/ESousa97/goincidentcli)
-![Last Commit](https://img.shields.io/github/last-commit/ESousa97/goincidentcli)
-[![CodeFactor](https://www.codefactor.io/repository/github/esousa97/goincidentcli/badge)](https://www.codefactor.io/repository/github/esousa97/goincidentcli)
+  <br>
+
+  ![CI](https://github.com/ESousa97/goincidentcli/actions/workflows/ci.yml/badge.svg)
+  [![Go Report Card](https://goreportcard.com/badge/github.com/ESousa97/goincidentcli?style=flat)](https://goreportcard.com/report/github.com/ESousa97/goincidentcli)
+  [![CodeFactor](https://www.codefactor.io/repository/github/esousa97/goincidentcli/badge?style=flat)](https://www.codefactor.io/repository/github/esousa97/goincidentcli)
+  [![Go Reference](https://img.shields.io/badge/go.dev-reference-007d9c?style=flat&logo=go&logoColor=white)](https://pkg.go.dev/github.com/ESousa97/goincidentcli)
+  ![License](https://img.shields.io/github/license/ESousa97/goincidentcli?style=flat&color=blue)
+  ![Go Version](https://img.shields.io/github/go-mod/go-version/ESousa97/goincidentcli?style=flat&logo=go&logoColor=white)
+  ![Last Commit](https://img.shields.io/github/last-commit/ESousa97/goincidentcli?style=flat)
+</div>
 
 ---
 
-goincidentcli is an isolated, local-first incident response tool. It empowers engineers to instantly declare incidents, spin up dedicated local investigation workspaces, automatically provision communication channels via Slack, and seamlessly compile chronologically ordered Markdown post-mortem reports.
-
-<div align="center">
-  <img src="assets/github-go.png" alt="Go Incident CLI Banner" width="600px">
-</div>
+`goincidentcli` is an isolated, local-first incident response tool. It empowers engineers to instantly declare incidents, spin up dedicated local investigation workspaces, automatically provision communication channels via Slack, and seamlessly compile chronologically ordered Markdown post-mortem reports.
 
 ## Demonstration
 
@@ -36,23 +36,25 @@ $ incident export --id INC-20260405-b7x2
 
 ![goincidentcli in action](assets/cli-dashboard.png)
 
-## Tech Stack
+## Technologies & Frameworks
 
-| Technology | Role |
-|---|---|
-| **Go** | Main language, ensuring performance and native concurrency. |
-| **Cobra** | CLI interface creation and command structuring. |
-| **Viper** | Configuration and environment variable management. |
-| **Slack API** | Integration for automatic creation of communication channels. |
+<div align="center">
+  <img src="https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white" alt="Go" />
+  <img src="https://img.shields.io/badge/Cobra-00ADD8?style=flat&logo=go&logoColor=white" alt="Cobra" />
+  <img src="https://img.shields.io/badge/Viper-00ADD8?style=flat&logo=go&logoColor=white" alt="Viper" />
+  <img src="https://img.shields.io/badge/Slack_API-E01E5A?style=flat&logo=slack&logoColor=white" alt="Slack API" />
+  <img src="https://img.shields.io/badge/Prometheus-E6522C?style=flat&logo=prometheus&logoColor=white" alt="Prometheus" />
+  <img src="https://img.shields.io/badge/BubbleTea-00ADD8?style=flat&logo=go&logoColor=white" alt="BubbleTea" />
+</div>
 
 ## Prerequisites
 
 - Go >= 1.21
-- A valid Slack Bot Token (optional, if you want Slack integration)
+- A valid Slack Bot Token (optional, for Slack integration)
 
 ## Installation and Usage
 
-### As binary
+### As a binary
 
 ```bash
 go install github.com/ESousa97/goincidentcli/cmd/incident@latest
@@ -73,10 +75,12 @@ make run
 
 | Target | Description |
 |---|---|
-| `build` | Compiles the CLI binary for the current platform. |
-| `run` | Runs the compiled CLI. |
-| `test` | Runs all application tests. |
-| `lint` | Executes code validations. |
+| `build` | Compiles the CLI binary for the current platform |
+| `run` | Runs the compiled CLI |
+| `test` | Runs all suite of tests |
+| `lint` | Executes code validations and spell checks |
+| `deps` | Downloads and tidies dependencies |
+| `clean` | Removes build artifacts |
 
 ## Architecture
 
@@ -111,13 +115,6 @@ graph TD
 - `internal/slack/`: Slack API integration to request and create custom channels for incident response teams.
 - `internal/config/`: Loading global user configuration stored in `~/.incident.yaml` via Viper.
 
-## Commands Reference
-
-| Command | Description | Example |
-|---|---|---|
-| `declare` | Declares a new incident, creates a local workspace, and spins up a Slack channel. | `incident declare --title "DB Down"` |
-| `export` | Generates a Markdown post-mortem report based on the local timeline JSON data. | `incident export --id INC-XXXXXX` |
-
 ## API Reference
 
 See the full documentation at [pkg.go.dev](https://pkg.go.dev/github.com/ESousa97/goincidentcli).
@@ -131,25 +128,52 @@ Configurations are managed via a `yaml` file located in the user's home path (`~
 | `api_token` | Optional API token for external systems | Optional |
 | `base_url` | Base URL used for integrations | Optional |
 | `slack_auth_token` | Slack Bot Token to automatically create channels | Optional |
+| `prometheus_url` | URL for Prometheus API queries | Optional |
 
-## Roadmap
+## Roadmap (Implemented Phases)
 
-- [x] Phase 1: CLI Foundation & Scaffolding - Initialized Cobra CLI with `declare` and `config` commands. Integrated Viper for credential management and local `.incidents/` state isolation.
-- [x] Phase 2: Slack Integration - Automated "War Room" creation. Provisions private Slack channels, sets purpose, and posts initial response templates.
-- [x] Phase 3: Timeline & Metrics - Implemented a chronological event logger (`incident log`). Integrates with Prometheus API to capture real-time system metrics during incident declaration.
-- [x] Phase 4: Automated Post-mortem Generator - Developed a reporting engine using Go templates. Exports incident timelines into structured Markdown files ready for review.
-- [x] Phase 5: Interactive TUI Dashboard - Built a "War Room" terminal interface using `bubbletea` and `lipgloss`. Displays real-time incident timers, recent events, and service health status.
+- [x] **Phase 1: CLI Foundation & Scaffolding (Scaffolding and Config)**
+  - **Objective:** Create the CLI structure and manage credentials securely.
+  - **What was done:** Configured Cobra CLI with `declare` and `config` commands. Used Viper to manage Slack tokens and monitoring URLs. Created `.incidents/` folder structure for state isolation.
+
+- [x] **Phase 2: Slack Integration (The Communicator)**
+  - **Objective:** Automate the creation of the digital "War Room".
+  - **What was done:** Integrated Slack API to create private channels (`inc-{date}-{title}`), set purpose, and post initial response templates with automated ID tracking.
+
+- [x] **Phase 3: Timeline & Metrics (The Chronicler)**
+  - **Objective:** Record real-time events and system context.
+  - **What was done:** Implemented an event logging system (`incident log`) using JSON. Integrated Prometheus to capture critical metrics at declaration time and attach them to the timeline.
+
+- [x] **Phase 4: Automated Post-mortem Generator (The Reporter)**
+  - **Objective:** Eliminate manual post-mortem report writing.
+  - **What was done:** Developed a reporting engine using Go `text/template` to generate `post-mortem.md` from incident timelines, including summary, impact, and corrective actions sections.
+
+- [x] **Phase 5: Interactive TUI Dashboard (The Terminal Dashboard)**
+  - **Objective:** Create a "War Room" visual experience in the terminal.
+  - **What was done:** Built a live dashboard using `bubbletea` and `lipgloss` showing incident timers (MTTR), recent logs, and real-time service health status monitoring.
 
 ## Contributing
 
-Link to [CONTRIBUTING.md](CONTRIBUTING.md) with a summary of how to contribute.
+Check our [CONTRIBUTING.md](CONTRIBUTING.md) to learn how to set up your environment, run tests, and submit Pull Requests.
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+
+<div align="center">
 
 ## Author
 
 **Enoque Sousa**
 
-[Portfolio](https://enoquesousa.vercel.app) | [GitHub](https://github.com/ESousa97)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/enoque-sousa-bb89aa168/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/ESousa97)
+[![Portfolio](https://img.shields.io/badge/Portfolio-FF5722?style=flat&logo=target&logoColor=white)](https://enoquesousa.vercel.app)
+
+**[⬆ Back to Top](#go-incident-cli)**
+
+Made with ❤️ by [Enoque Sousa](https://github.com/ESousa97)
+
+**Project Status:** Completed — Ready for production use
+
+</div>
