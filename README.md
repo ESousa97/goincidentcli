@@ -19,6 +19,10 @@
 
 `goincidentcli` is an isolated, local-first incident response tool. It empowers engineers to instantly declare incidents, spin up dedicated local investigation workspaces, automatically provision communication channels via Slack, and seamlessly compile chronologically ordered Markdown post-mortem reports.
 
+## About
+
+**Go Incident CLI** is a terminal-based toolkit designed to streamline the entire incident lifecycle. By automating the creation of investigation workspaces, Slack communication channels, and post-mortem reports, it allows engineering teams to focus on technical resolution rather than administrative overhead.
+
 ## Demonstration
 
 Declaring an Incident via CLI:
