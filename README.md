@@ -6,13 +6,14 @@
 
   <br>
 
-  ![CI](https://github.com/ESousa97/goincidentcli/actions/workflows/ci.yml/badge.svg)
-  [![Go Report Card](https://goreportcard.com/badge/github.com/ESousa97/goincidentcli?style=flat)](https://goreportcard.com/report/github.com/ESousa97/goincidentcli)
-  [![CodeFactor](https://www.codefactor.io/repository/github/esousa97/goincidentcli/badge?style=flat)](https://www.codefactor.io/repository/github/esousa97/goincidentcli)
-  [![Go Reference](https://img.shields.io/badge/go.dev-reference-007d9c?style=flat&logo=go&logoColor=white)](https://pkg.go.dev/github.com/ESousa97/goincidentcli)
-  ![License](https://img.shields.io/github/license/ESousa97/goincidentcli?style=flat&color=blue)
-  ![Go Version](https://img.shields.io/github/go-mod/go-version/ESousa97/goincidentcli?style=flat&logo=go&logoColor=white)
-  ![Last Commit](https://img.shields.io/github/last-commit/ESousa97/goincidentcli?style=flat)
+![CI](https://github.com/ESousa97/goincidentcli/actions/workflows/ci.yml/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ESousa97/goincidentcli?style=flat)](https://goreportcard.com/report/github.com/ESousa97/goincidentcli)
+[![CodeFactor](https://www.codefactor.io/repository/github/esousa97/goincidentcli/badge?style=flat)](https://www.codefactor.io/repository/github/esousa97/goincidentcli)
+[![Go Reference](https://img.shields.io/badge/go.dev-reference-007d9c?style=flat&logo=go&logoColor=white)](https://pkg.go.dev/github.com/ESousa97/goincidentcli)
+![License](https://img.shields.io/github/license/ESousa97/goincidentcli?style=flat&color=blue)
+![Go Version](https://img.shields.io/github/go-mod/go-version/ESousa97/goincidentcli?style=flat&logo=go&logoColor=white)
+![Last Commit](https://img.shields.io/github/last-commit/ESousa97/goincidentcli?style=flat)
+
 </div>
 
 ---
@@ -26,6 +27,7 @@
 ## Demonstration
 
 Declaring an Incident via CLI:
+
 ```bash
 $ incident declare --title "Authentication API latency spike"
 2026/04/05 15:30:00 [INFO] Incident declared: INC-20260405-b7x2
@@ -33,6 +35,7 @@ $ incident declare --title "Authentication API latency spike"
 ```
 
 Exporting an Incident Report:
+
 ```bash
 $ incident export --id INC-20260405-b7x2
 2026/04/05 16:00:00 [INFO] Report generated at .incidents/INC-20260405-b7x2/report.md
@@ -77,14 +80,14 @@ make run
 
 ## Makefile Targets
 
-| Target | Description |
-|---|---|
+| Target  | Description                                      |
+| ------- | ------------------------------------------------ |
 | `build` | Compiles the CLI binary for the current platform |
-| `run` | Runs the compiled CLI |
-| `test` | Runs all suite of tests |
-| `lint` | Executes code validations and spell checks |
-| `deps` | Downloads and tidies dependencies |
-| `clean` | Removes build artifacts |
+| `run`   | Runs the compiled CLI                            |
+| `test`  | Runs all suite of tests                          |
+| `lint`  | Executes code validations and spell checks       |
+| `deps`  | Downloads and tidies dependencies                |
+| `clean` | Removes build artifacts                          |
 
 ## Architecture
 
@@ -127,12 +130,12 @@ See the full documentation at [pkg.go.dev](https://pkg.go.dev/github.com/ESousa9
 
 Configurations are managed via a `yaml` file located in the user's home path (`~/.incident.yaml`). The CLI auto-creates a template if none exists.
 
-| Key | Description | Requirement |
-|---|---|---|
-| `api_token` | Optional API token for external systems | Optional |
-| `base_url` | Base URL used for integrations | Optional |
-| `slack_auth_token` | Slack Bot Token to automatically create channels | Optional |
-| `prometheus_url` | URL for Prometheus API queries | Optional |
+| Key                | Description                                      | Requirement |
+| ------------------ | ------------------------------------------------ | ----------- |
+| `api_token`        | Optional API token for external systems          | Optional    |
+| `base_url`         | Base URL used for integrations                   | Optional    |
+| `slack_auth_token` | Slack Bot Token to automatically create channels | Optional    |
+| `prometheus_url`   | URL for Prometheus API queries                   | Optional    |
 
 ## Roadmap (Implemented Phases)
 
