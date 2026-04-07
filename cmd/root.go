@@ -66,6 +66,8 @@ func initConfig() {
 			viper.Set("api_token", "")
 			viper.Set("base_url", "")
 			viper.Set("slack_token", "")
+			viper.Set("prometheus_url", "")
+			viper.Set("prometheus_query", "")
 			if err := viper.SafeWriteConfigAs(cfgPath); err != nil {
 				fmt.Printf("Error creating config file: %v\n", err)
 			} else {
@@ -82,6 +84,8 @@ func initConfig() {
 	_ = viper.BindEnv("api_token")
 	_ = viper.BindEnv("base_url")
 	_ = viper.BindEnv("slack_token")
+	_ = viper.BindEnv("prometheus_url")
+	_ = viper.BindEnv("prometheus_query")
 	viper.AutomaticEnv() // read in environment variables that match
 
 	// If a config file is found, read it in.

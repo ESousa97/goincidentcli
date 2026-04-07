@@ -74,6 +74,46 @@ func Declare(title string) (*Incident, error) {
 	return inc, nil
 }
 
+// Dir returns the filesystem path for a given incident ID.
+func Dir(id string) string {
+	return filepath.Join(incidentsDir, id)
+}
+
+// FindMostRecent scans the incidents directory and returns the most recently created incident.
+func FindMostRecent() (*Incident, error) {
+	entries, err := os.ReadDir(incidentsDir)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return nil, fmt.Errorf("no incidents found: directory %q does not exist", incidentsDir)
+		}
+		return nil, fmt.Errorf("failed to read incidents directory: %w", err)
+	}
+
+	var latest *Incident
+	for _, entry := range entries {
+		if !entry.IsDir() {
+			continue
+		}
+		metadataPath := filepath.Join(incidentsDir, entry.Name(), "metadata.json")
+		data, err := os.ReadFile(metadataPath)
+		if err != nil {
+			continue
+		}
+		var inc Incident
+		if err := json.Unmarshal(data, &inc); err != nil {
+			continue
+		}
+		if latest == nil || inc.CreatedAt.After(latest.CreatedAt) {
+			latest = &inc
+		}
+	}
+
+	if latest == nil {
+		return nil, fmt.Errorf("no incidents found")
+	}
+	return latest, nil
+}
+
 // UpdateSlackChannel updates the metadata.json with the provided Slack channel ID.
 func UpdateSlackChannel(id string, channelID string) error {
 	path := filepath.Join(incidentsDir, id)

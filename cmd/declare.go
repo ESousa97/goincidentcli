@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"goincidentcli/internal/incident"
 	"goincidentcli/internal/slack"
+	"goincidentcli/internal/timeline"
 
 	"github.com/spf13/cobra"
 )
@@ -26,6 +27,15 @@ var declareCmd = &cobra.Command{
 		}
 
 		fmt.Printf("Incident declared locally!\nID: %s\nTitle: %s\nFolder created: .incidents/%s\n", inc.ID, inc.Title, inc.ID)
+
+		// Initial timeline entry with optional Prometheus snapshot
+		prometheusMetrics := capturePrometheusMetrics()
+		initialMessage := fmt.Sprintf("Incident declared: %s", title)
+		if _, err := timeline.AddEntry(incident.Dir(inc.ID), initialMessage, currentAuthor(), prometheusMetrics); err != nil {
+			fmt.Printf("Warning: failed to create initial timeline entry: %v\n", err)
+		} else if len(prometheusMetrics) > 0 {
+			fmt.Println("Prometheus metrics captured at declaration time.")
+		}
 
 		// Slack integration (Fault-tolerant)
 		if appCfg.SlackToken != "" {
